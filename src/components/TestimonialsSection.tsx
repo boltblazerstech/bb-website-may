@@ -1,7 +1,8 @@
 import { motion } from 'motion/react';
-import { Zap, Linkedin } from 'lucide-react';
+import { Linkedin } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
 import TypewriterTitle from './TypewriterTitle';
+import bbLogo from '../assets/bb-logo.png';
 
 export default function TestimonialsSection() {
     const featured = testimonials.filter((t) => t.id === 1);
@@ -9,6 +10,9 @@ export default function TestimonialsSection() {
 
     return (
         <section id="testimonials" className="py-24 px-6 bg-[#0F172A] border-t border-white/5 relative overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none">
+                <img src={bbLogo} alt="" className="w-[800px] h-[800px] object-contain grayscale" />
+            </div>
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col gap-6 mb-16">
                     <div className="flex flex-col gap-3">

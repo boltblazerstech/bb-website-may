@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Zap, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
+import bbLogo from '../assets/bb-logo.png';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -61,8 +62,8 @@ export default function Header() {
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="flex items-center gap-2.5 group cursor-pointer"
                 >
-                    <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Zap className="w-5.5 h-5.5 text-white fill-current" />
+                    <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src={bbLogo} alt="BoltBlazers Logo" className="w-full h-full object-contain" />
                     </div>
                     <span className="text-2xl font-bold tracking-tight">BoltBlazers</span>
                 </button>
