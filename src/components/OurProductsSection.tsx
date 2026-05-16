@@ -105,12 +105,17 @@ export default function OurProductsSection() {
                                             <ExternalLink className="w-4 h-4" />
                                         </a>
                                     )}
-                                    {product.demo && (
-                                        <a href={product.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full font-bold transition-colors border border-white/10">
-                                            <PlayCircle className="w-4 h-4" />
-                                            View Demo
-                                        </a>
-                                    )}
+                                     {product.demo && (
+                                         <a 
+                                            href={`https://wa.me/919528523430?text=${encodeURIComponent(`Hi BoltBlazers, I'm interested in a demo for ${product.name}.`)}`}
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full font-bold transition-colors border border-white/10"
+                                         >
+                                             <PlayCircle className="w-4 h-4" />
+                                             Request Demo
+                                         </a>
+                                     )}
                                 </div>
                             </div>
                         </motion.div>

@@ -164,10 +164,17 @@ export default function ProjectsSection() {
                                     </div>
 
                                     <div className="mt-auto pt-6 flex flex-wrap items-center gap-4">
-                                        <button className="text-xs font-bold uppercase tracking-widest text-blue-500 flex items-center gap-2 group/btn">
-                                            {project.type === 'private' ? 'Request Demo' : 'View Case Study'}
-                                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                                        </button>
+                                         {project.type === 'private' && (
+                                             <a 
+                                                 href={`https://wa.me/919528523430?text=${encodeURIComponent(`Hi BoltBlazers, I'm interested in a demo for ${project.name}.`)}`}
+                                                 target="_blank"
+                                                 rel="noopener noreferrer"
+                                                 className="text-xs font-bold uppercase tracking-widest text-blue-500 flex items-center gap-2 group/btn cursor-pointer"
+                                             >
+                                                 Request Demo
+                                                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                                             </a>
+                                         )}
                                         {project.link && (
                                             <a
                                                 href={project.link}
