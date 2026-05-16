@@ -1,12 +1,13 @@
 import { motion } from 'motion/react';
 import { TEAM } from '../data/team';
+import TypewriterTitle from './TypewriterTitle';
 
 export default function TeamSection() {
     return (
         <section id="team" className="py-24 px-6 bg-[#0B0F1A] border-t border-white/5">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col gap-4 mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Leadership</h2>
+                    <TypewriterTitle text="Leadership" className="text-3xl md:text-5xl font-bold tracking-tight" />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-12">

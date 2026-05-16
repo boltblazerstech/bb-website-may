@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Send, User, Mail, Phone, MessageSquare } from 'lucide-react';
+import TypewriterTitle from './TypewriterTitle';
 
 export default function ContactSection() {
     const [formData, setFormData] = useState({
@@ -62,9 +63,10 @@ export default function ContactSection() {
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest w-fit">
                             Ready to build?
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
-                            Let's bring your <span className="text-blue-500">vision</span> to life.
-                        </h2>
+                        <TypewriterTitle
+                            text="Let's bring your vision to life."
+                            className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]"
+                        />
                         <p className="text-gray-400 text-lg max-w-lg leading-relaxed">
                             Whether you have a specific project in mind or just want to explore the possibilities, our team is ready to help you scale.
                         </p>

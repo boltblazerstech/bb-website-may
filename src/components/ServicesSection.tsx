@@ -1,13 +1,14 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { SERVICES } from '../data/services';
+import TypewriterTitle from './TypewriterTitle';
 
 export default function ServicesSection() {
     return (
         <section id="services" className="py-24 px-6 bg-[#0F172A] border-t border-white/5">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col gap-4 mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Our Expertise</h2>
+                    <TypewriterTitle text="Our Expertise" className="text-3xl md:text-5xl font-bold tracking-tight" />
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,6 +1,7 @@
 import { ExternalLink, PlayCircle } from 'lucide-react';
 import { motion } from 'motion/react';
 import imgScrapdms from '../assets/project_images/scrapdms.webp';
+import TypewriterTitle from './TypewriterTitle';
 
 // Placeholders for LeadCure and ClientNest until actual images are provided
 const imgLeadcure = 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200'; 
@@ -42,7 +43,7 @@ export default function OurProductsSection() {
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest w-fit mx-auto md:mx-0">
                         Our Own Products
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Products We Built & Scale</h2>
+                    <TypewriterTitle text="Products We Built & Scale" className="text-4xl md:text-5xl font-bold tracking-tight text-white" />
                     <p className="text-gray-400 max-w-2xl text-lg mx-auto md:mx-0">
                         Beyond client services, we actively develop, launch, and scale our own successful SaaS products.
                     </p>

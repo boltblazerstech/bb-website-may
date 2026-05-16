@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Zap, Linkedin } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
+import TypewriterTitle from './TypewriterTitle';
 
 export default function TestimonialsSection() {
     const featured = testimonials.filter((t) => t.id === 1);
@@ -10,7 +11,7 @@ export default function TestimonialsSection() {
         <section id="testimonials" className="py-24 px-6 bg-[#0F172A] border-t border-white/5 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col gap-4 mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Client Results</h2>
+                    <TypewriterTitle text="Client Results" className="text-3xl md:text-5xl font-bold tracking-tight" />
                 </div>
 
                 {/* Featured Testimonial */}

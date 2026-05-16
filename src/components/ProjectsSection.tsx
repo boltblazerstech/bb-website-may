@@ -4,6 +4,7 @@ import { ArrowRight, ExternalLink, Lock } from 'lucide-react';
 import { PROJECTS, getCategoryIcon } from '../data/projects';
 import { PROJECT_FILTERS } from '../constants';
 import type { ProjectFilter } from '../constants';
+import TypewriterTitle from './TypewriterTitle';
 
 // ─── 3D Tilt Card ──────────────────────────────────────────────────────────
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -64,7 +65,7 @@ export default function ProjectsSection() {
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                     <div className="flex flex-col gap-4">
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Our Projects</h2>
+                        <TypewriterTitle text="Our Projects" className="text-3xl md:text-5xl font-bold tracking-tight" />
                         <p className="text-gray-500 max-w-2xl">
                             A curated selection of real-world systems engineered for scalability, reliability, and performance.
                         </p>
