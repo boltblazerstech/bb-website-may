@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { Linkedin } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
 import TypewriterTitle from './TypewriterTitle';
-import bbLogo from '../assets/boltblazers logo single letter.jpeg';
+import bbLogo from '../assets/bb-logo.png';
 
 export default function TestimonialsSection() {
     const featured = testimonials.filter((t) => t.id === 1);

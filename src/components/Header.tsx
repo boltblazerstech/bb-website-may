@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
-import bbLogo from '../assets/boltblazers logo single letter.jpeg';
+import bbLogo from '../assets/bb-logo.png';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
