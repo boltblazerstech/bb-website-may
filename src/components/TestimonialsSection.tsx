@@ -85,7 +85,6 @@ export default function TestimonialsSection() {
                                 </div>
                             </div>
                             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-                                <Zap className="w-64 h-64 text-blue-500" />
                             </div>
                             <div className="absolute -inset-px bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl pointer-events-none" />
                         </motion.div>
