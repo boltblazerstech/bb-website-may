@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../constants';
-import bbLogo from '../assets/bb-logo.png';
+import bbFullLogo from '../assets/boltblazers_logo-full-removebg-preview.png';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,12 +60,9 @@ export default function Header() {
                 {/* Logo */}
                 <button 
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="flex items-center gap-2.5 group cursor-pointer"
+                    className="flex items-center group cursor-pointer"
                 >
-                    <div className="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <img src={bbLogo} alt="BoltBlazers Logo" className="w-full h-full object-contain" />
-                    </div>
-                    <span className="text-2xl font-bold tracking-tight">BoltBlazers</span>
+                    <img src={bbFullLogo} alt="BoltBlazers Logo" className="h-8 md:h-10 w-auto group-hover:scale-105 transition-transform" />
                 </button>
 
                 {/* Desktop Nav */}
