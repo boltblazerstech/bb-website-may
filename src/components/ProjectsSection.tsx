@@ -1,9 +1,45 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ExternalLink, Lock } from 'lucide-react';
 import { PROJECTS, getCategoryIcon } from '../data/projects';
 import { PROJECT_FILTERS } from '../constants';
 import type { ProjectFilter } from '../constants';
+
+// ─── 3D Tilt Card ──────────────────────────────────────────────────────────
+function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
+    const ref = useRef<HTMLDivElement>(null);
+    const [style, setStyle] = useState({});
+
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;  // -1 to 1
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;  // -1 to 1
+        setStyle({
+            transform: `perspective(800px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) scale(1.02)`,
+            transition: 'transform 0.1s ease',
+        });
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+        setStyle({
+            transform: 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)',
+            transition: 'transform 0.4s ease',
+        });
+    }, []);
+
+    return (
+        <div
+            ref={ref}
+            style={style}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={className}
+        >
+            {children}
+        </div>
+    );
+}
 
 export default function ProjectsSection() {
     const [activeFilter, setActiveFilter] = useState<ProjectFilter>('All');
@@ -65,8 +101,9 @@ export default function ProjectsSection() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                                whileHover={{ y: -8 }}
-                                className="group relative bg-[#161B26] border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-all duration-300 flex flex-col h-full"
+                            >
+                            <TiltCard
+                                className="group relative bg-[#161B26] border border-white/5 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-colors duration-300 flex flex-col h-full"
                             >
                                 {/* Mockup Image */}
                                 <div className="relative overflow-hidden bg-gray-900 aspect-[16/10]">
@@ -140,6 +177,7 @@ export default function ProjectsSection() {
 
                                 {/* Subtle Glow */}
                                 <div className="absolute -inset-px bg-gradient-to-br from-blue-500/0 via-blue-500/0 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
+                            </TiltCard>
                             </motion.div>
                         ))}
                     </AnimatePresence>
