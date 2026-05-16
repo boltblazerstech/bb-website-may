@@ -133,7 +133,7 @@ export default function HeroSection() {
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-4">
                         <div className="flex flex-col">
-                            <span className="text-4xl md:text-6xl font-bold text-gray-600/40 select-none mb-2">We</span>
+                            <span className="text-4xl md:text-6xl font-bold text-blue-500 select-none mb-2">We</span>
 
                             {/* ── 3. Typewriter Animation ─────────────── */}
                             <div className="relative h-[140px] md:h-[190px] overflow-hidden">
