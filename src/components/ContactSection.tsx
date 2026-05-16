@@ -58,6 +58,7 @@ export default function ContactSection() {
 
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
                 {/* Content Side */}
+                <div className="flex flex-col gap-12">
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-3">
                             <TypewriterTitle
