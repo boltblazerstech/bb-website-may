@@ -62,7 +62,7 @@ export default function Header() {
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="flex items-center group cursor-pointer"
                 >
-                    <img src={bbFullLogo} alt="BoltBlazers Logo" className="h-10 md:h-14 w-auto group-hover:scale-105 transition-transform" />
+                    <img src={bbFullLogo} alt="BoltBlazers Logo" className="h-40 sm:h-50 md:h-60 w-auto group-hover:scale-105 transition-transform" />
                 </button>
 
                 {/* Desktop Nav */}
