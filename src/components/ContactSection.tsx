@@ -58,15 +58,20 @@ export default function ContactSection() {
 
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
                 {/* Content Side */}
-                <div className="flex flex-col gap-8">
-                    <div className="flex flex-col gap-4">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest w-fit">
-                            Ready to build?
+                    <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-3">
+                            <TypewriterTitle
+                                text="Let's bring your vision to life."
+                                className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]"
+                            />
+                            <motion.div 
+                                initial={{ width: 0 }}
+                                whileInView={{ width: '80px' }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 1, duration: 0.8 }}
+                                className="h-1 bg-blue-600 rounded-full" 
+                            />
                         </div>
-                        <TypewriterTitle
-                            text="Let's bring your vision to life."
-                            className="text-4xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]"
-                        />
                         <p className="text-gray-400 text-lg max-w-lg leading-relaxed">
                             Whether you have a specific project in mind or just want to explore the possibilities, our team is ready to help you scale.
                         </p>

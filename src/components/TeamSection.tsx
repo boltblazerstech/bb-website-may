@@ -6,8 +6,20 @@ export default function TeamSection() {
     return (
         <section id="team" className="py-24 px-6 bg-[#0B0F1A] border-t border-white/5">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col gap-4 mb-16">
-                    <TypewriterTitle text="Leadership" className="text-3xl md:text-5xl font-bold tracking-tight" />
+                <div className="flex flex-col gap-6 mb-16">
+                    <div className="flex flex-col gap-3">
+                        <TypewriterTitle text="Leadership" className="text-3xl md:text-5xl font-bold tracking-tight" />
+                        <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '80px' }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 1, duration: 0.8 }}
+                            className="h-1 bg-blue-600 rounded-full" 
+                        />
+                    </div>
+                    <p className="text-gray-400 max-w-2xl text-lg">
+                        Meet the engineering minds behind BoltBlazers' most complex systems.
+                    </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8 lg:gap-12">

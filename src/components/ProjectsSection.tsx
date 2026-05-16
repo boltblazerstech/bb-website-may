@@ -62,14 +62,20 @@ export default function ProjectsSection() {
         <section id="portfolio" className="py-24 px-6 bg-[#0F172A] border-t border-white/5">
             <div className="max-w-7xl mx-auto">
 
-                {/* Section Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-                    <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-6 mb-16">
+                    <div className="flex flex-col gap-3">
                         <TypewriterTitle text="Our Projects" className="text-3xl md:text-5xl font-bold tracking-tight" />
-                        <p className="text-gray-500 max-w-2xl">
-                            A curated selection of real-world systems engineered for scalability, reliability, and performance.
-                        </p>
+                        <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '80px' }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 1, duration: 0.8 }}
+                            className="h-1 bg-blue-600 rounded-full" 
+                        />
                     </div>
+                    <p className="text-gray-400 max-w-2xl text-lg">
+                        A curated selection of high-impact systems engineered for scalability and performance.
+                    </p>
                 </div>
 
                 {/* Filter Bar */}

@@ -10,8 +10,20 @@ export default function TestimonialsSection() {
     return (
         <section id="testimonials" className="py-24 px-6 bg-[#0F172A] border-t border-white/5 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col gap-4 mb-16">
-                    <TypewriterTitle text="Testimonials" className="text-3xl md:text-5xl font-bold tracking-tight" />
+                <div className="flex flex-col gap-6 mb-16">
+                    <div className="flex flex-col gap-3">
+                        <TypewriterTitle text="Testimonials" className="text-3xl md:text-5xl font-bold tracking-tight" />
+                        <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '80px' }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 1, duration: 0.8 }}
+                            className="h-1 bg-blue-600 rounded-full" 
+                        />
+                    </div>
+                    <p className="text-gray-400 max-w-2xl text-lg">
+                        What our clients say about our partnership and engineering impact.
+                    </p>
                 </div>
 
                 {/* Featured Testimonial */}
