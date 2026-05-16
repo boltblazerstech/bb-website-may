@@ -2,7 +2,7 @@ import { Code2, Layout, Cpu, Zap, ShieldCheck, TrendingUp } from 'lucide-react';
 import type { Service } from '../types';
 import DashboardImg from '../assets/dashboard2.jpg'
 import EcommerceImg from "../assets/ecommerce.jpg"
-import AiImg from "../assets/aichatbot.jpg"
+import AiImg from "../assets/aichatbot.JPG"
 import AppImg from "../assets/app.png"
 import MaintenanceImg from "../assets/maintenance.jpg"
 import GrowthImg from "../assets/client_images/digitalmarketing.webp"
