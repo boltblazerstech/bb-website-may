@@ -11,7 +11,7 @@ export default function TestimonialsSection() {
         <section id="testimonials" className="py-24 px-6 bg-[#0F172A] border-t border-white/5 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col gap-4 mb-16">
-                    <TypewriterTitle text="Client Results" className="text-3xl md:text-5xl font-bold tracking-tight" />
+                    <TypewriterTitle text="Testimonials" className="text-3xl md:text-5xl font-bold tracking-tight" />
                 </div>
 
                 {/* Featured Testimonial */}

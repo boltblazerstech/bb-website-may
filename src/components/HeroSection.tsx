@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import amazonLogo from '../assets/amazon.svg';
@@ -6,7 +6,6 @@ import oracleLogo from '../assets/oracle.svg';
 import phonepeLogo from '../assets/phonepe.svg';
 import microsoftLogo from '../assets/microsoft.svg';
 import { PHRASES } from '../data/phrases';
-import { PHRASE_INTERVAL_MS } from '../constants';
 import { useCountUp } from '../hooks/useCountUp';
 
 // ─── Floating Particle component ─────────────────────────────────────────────
@@ -44,69 +43,66 @@ function Particle({ index }: { index: number }) {
     );
 }
 
-// ─── Scramble Text Hook ───────────────────────────────────────────────────────
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+// ─── Typewriter Loop Hook ────────────────────────────────────────────────────
+function useTypingLoop(phrases: string[], typeSpeed = 80, deleteSpeed = 40, pauseMs = 1800) {
+    const [displayed, setDisplayed] = useState('');
+    const [phraseIndex, setPhraseIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [showCursor, setShowCursor] = useState(true);
+    const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-function useScramble(target: string) {
-    const [display, setDisplay] = useState(target);
-    const frameRef = useRef<number | null>(null);
-    const iterationsRef = useRef(0);
-
-    const scramble = useCallback((text: string) => {
-        iterationsRef.current = 0;
-        const totalFrames = text.length * 3;
+    useEffect(() => {
+        const currentPhrase = phrases[phraseIndex];
 
         const tick = () => {
-            const i = iterationsRef.current;
-            const resolved = Math.floor(i / 3);
-
-            const scrambled = text
-                .split('')
-                .map((char, idx) => {
-                    if (idx < resolved) return char;
-                    if (char === ' ') return ' ';
-                    return CHARS[Math.floor(Math.random() * CHARS.length)];
-                })
-                .join('');
-
-            setDisplay(scrambled);
-            iterationsRef.current += 1;
-
-            if (iterationsRef.current <= totalFrames) {
-                frameRef.current = requestAnimationFrame(tick);
+            if (!isDeleting) {
+                // Typing forward
+                setDisplayed((prev) => {
+                    const next = currentPhrase.slice(0, prev.length + 1);
+                    if (next === currentPhrase) {
+                        // Done typing — pause then start deleting
+                        timeoutRef.current = setTimeout(() => setIsDeleting(true), pauseMs);
+                        return next;
+                    }
+                    timeoutRef.current = setTimeout(tick, typeSpeed);
+                    return next;
+                });
             } else {
-                setDisplay(text);
+                // Deleting backward
+                setDisplayed((prev) => {
+                    const next = prev.slice(0, -1);
+                    if (next === '') {
+                        // Done deleting — move to next phrase
+                        setIsDeleting(false);
+                        setPhraseIndex((i) => (i + 1) % phrases.length);
+                        return '';
+                    }
+                    timeoutRef.current = setTimeout(tick, deleteSpeed);
+                    return next;
+                });
             }
         };
 
-        if (frameRef.current) cancelAnimationFrame(frameRef.current);
-        frameRef.current = requestAnimationFrame(tick);
+        timeoutRef.current = setTimeout(tick, isDeleting ? deleteSpeed : typeSpeed);
+        return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+    }, [phraseIndex, isDeleting, phrases, typeSpeed, deleteSpeed, pauseMs]);
+
+    // Blinking cursor
+    useEffect(() => {
+        const interval = setInterval(() => setShowCursor((c) => !c), 530);
+        return () => clearInterval(interval);
     }, []);
 
-    useEffect(() => {
-        scramble(target);
-        return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
-    }, [target, scramble]);
-
-    return display;
+    return { displayed, showCursor, phraseIndex };
 }
-
-// ─── 3D Tilt Card (used for hero panels) ─────────────────────────────────────
-// (Tilt is on ProjectsSection cards; no need here)
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function HeroSection() {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const phrases = PHRASES.map((p) => p.text);
+    const { displayed, showCursor, phraseIndex } = useTypingLoop(phrases);
+    const activeIndex = phraseIndex;
     const particles = useRef(Array.from({ length: 30 }, (_, i) => i));
-    const scrambledText = useScramble(PHRASES[activeIndex].text);
     const { count: startupCount, ref: countRef } = useCountUp(50, 1800);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % PHRASES.length);
-        }, PHRASE_INTERVAL_MS);
-        return () => clearInterval(interval);
-    }, []);
 
     return (
         <main className="relative pt-24 pb-12 px-6 max-w-7xl mx-auto min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden">
@@ -150,22 +146,22 @@ export default function HeroSection() {
                         <div className="flex flex-col">
                             <span className="text-4xl md:text-6xl font-bold text-gray-600/40 select-none mb-2">We</span>
 
-                            {/* ── 3. Scramble Text + Phrase Rotation ─────── */}
+                            {/* ── 3. Typewriter Animation ─────────────── */}
                             <div className="relative h-[140px] md:h-[190px] overflow-hidden">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={activeIndex}
-                                        initial={{ y: 40, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        exit={{ y: -40, opacity: 0 }}
-                                        transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-                                        className="absolute inset-0 flex items-center"
-                                    >
-                                        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-white leading-tight font-mono">
-                                            {scrambledText}
-                                        </h1>
-                                    </motion.div>
-                                </AnimatePresence>
+                                <div className="absolute inset-0 flex items-center">
+                                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight">
+                                        <span style={{ color: PHRASES[activeIndex].color }}>
+                                            {displayed}
+                                        </span>
+                                        <span
+                                            className="inline-block w-[4px] h-[0.85em] ml-1 align-middle rounded-sm"
+                                            style={{
+                                                backgroundColor: showCursor ? PHRASES[activeIndex].color : 'transparent',
+                                                transition: 'background-color 0.1s',
+                                            }}
+                                        />
+                                    </h1>
+                                </div>
                             </div>
                         </div>
                     </div>

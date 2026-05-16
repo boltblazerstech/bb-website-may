@@ -43,7 +43,7 @@ export default function OurProductsSection() {
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold uppercase tracking-widest w-fit mx-auto md:mx-0">
                         Our Own Products
                     </div>
-                    <TypewriterTitle text="Products We Built & Scale" className="text-4xl md:text-5xl font-bold tracking-tight text-white" />
+                    <TypewriterTitle text="Our Own SaaS products" className="text-4xl md:text-5xl font-bold tracking-tight text-white" />
                     <p className="text-gray-400 max-w-2xl text-lg mx-auto md:mx-0">
                         Beyond client services, we actively develop, launch, and scale our own successful SaaS products.
                     </p>
