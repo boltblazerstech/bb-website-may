@@ -44,48 +44,36 @@ function Particle({ index }: { index: number }) {
 }
 
 // ─── Typewriter Loop Hook ────────────────────────────────────────────────────
-function useTypingLoop(phrases: string[], typeSpeed = 80, deleteSpeed = 40, pauseMs = 1800) {
+// ─── Typewriter: type fast → pause → instant swap ────────────────────────────
+function useTypingLoop(phrases: string[], typeSpeed = 35, pauseMs = 2500) {
     const [displayed, setDisplayed] = useState('');
     const [phraseIndex, setPhraseIndex] = useState(0);
-    const [isDeleting, setIsDeleting] = useState(false);
     const [showCursor, setShowCursor] = useState(true);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
         const currentPhrase = phrases[phraseIndex];
+        let charIndex = displayed.length; // resume from current position
 
-        const tick = () => {
-            if (!isDeleting) {
-                // Typing forward
-                setDisplayed((prev) => {
-                    const next = currentPhrase.slice(0, prev.length + 1);
-                    if (next === currentPhrase) {
-                        // Done typing — pause then start deleting
-                        timeoutRef.current = setTimeout(() => setIsDeleting(true), pauseMs);
-                        return next;
-                    }
-                    timeoutRef.current = setTimeout(tick, typeSpeed);
-                    return next;
-                });
+        const typeNext = () => {
+            charIndex++;
+            setDisplayed(currentPhrase.slice(0, charIndex));
+
+            if (charIndex < currentPhrase.length) {
+                timeoutRef.current = setTimeout(typeNext, typeSpeed);
             } else {
-                // Deleting backward
-                setDisplayed((prev) => {
-                    const next = prev.slice(0, -1);
-                    if (next === '') {
-                        // Done deleting — move to next phrase
-                        setIsDeleting(false);
-                        setPhraseIndex((i) => (i + 1) % phrases.length);
-                        return '';
-                    }
-                    timeoutRef.current = setTimeout(tick, deleteSpeed);
-                    return next;
-                });
+                // Fully typed — pause then instantly swap to next phrase
+                timeoutRef.current = setTimeout(() => {
+                    setDisplayed(''); // instant clear
+                    setPhraseIndex((i) => (i + 1) % phrases.length);
+                }, pauseMs);
             }
         };
 
-        timeoutRef.current = setTimeout(tick, isDeleting ? deleteSpeed : typeSpeed);
+        timeoutRef.current = setTimeout(typeNext, typeSpeed);
         return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-    }, [phraseIndex, isDeleting, phrases, typeSpeed, deleteSpeed, pauseMs]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [phraseIndex]);
 
     // Blinking cursor
     useEffect(() => {
@@ -100,9 +88,10 @@ function useTypingLoop(phrases: string[], typeSpeed = 80, deleteSpeed = 40, paus
 export default function HeroSection() {
     const phrases = PHRASES.map((p) => p.text);
     const { displayed, showCursor, phraseIndex } = useTypingLoop(phrases);
-    const activeIndex = phraseIndex;
+    const activeIndex = phraseIndex; // right panel is always in sync
     const particles = useRef(Array.from({ length: 30 }, (_, i) => i));
     const { count: startupCount, ref: countRef } = useCountUp(50, 1800);
+
 
     return (
         <main className="relative pt-24 pb-12 px-6 max-w-7xl mx-auto min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden">
@@ -243,10 +232,10 @@ export default function HeroSection() {
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 1.05 }}
-                            transition={{ duration: 0.4 }}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -12 }}
+                            transition={{ duration: 0.25, ease: 'easeInOut' }}
                             className="h-full flex flex-col justify-between"
                         >
 
