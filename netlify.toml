@@ -1,0 +1,10 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# This ensures that any deep links will be redirected to index.html
+# This is crucial if you ever decide to add React Router in the future
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
